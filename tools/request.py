@@ -6,9 +6,9 @@ from time import sleep
 from bs4 import BeautifulSoup
 
 proxyHost = "proxy.abuyun.com"
-proxyPort = "9010"
-proxyUser = "HL567D1M3478750P"
-proxyPass = "4E3550486D08CCD9"
+proxyPort = "9020"
+proxyUser = "H2QT394U8X07KR4D"
+proxyPass = "5A972F1D6B04A565"
 proxyMeta = "http://%(user)s:%(pass)s@%(host)s:%(port)s" % {
     "host" : proxyHost,
     "port" : proxyPort,
@@ -25,8 +25,7 @@ def html_to_soup(content):
 
 def make_request(url):
 	try:
-	    # r = requests.get(url, headers={}, timeout=1, allow_redirects=True, proxies=proxies)
-	    r = requests.get(url)
+	    r = requests.get(url, headers={}, timeout=1, allow_redirects=True, proxies=proxies)
 	except requests.exceptions.Timeout:
 	    print 'Maybe set up for a retry, or continue in a retry loop'
 	except requests.exceptions.TooManyRedirects:
@@ -44,6 +43,6 @@ def make_requests(urls):
 		url = urls.popleft()
 		soup = make_request(url)
 		if soup == None:
-			links.append(url)
+			urls.append(url)
 		else:
 			yield soup

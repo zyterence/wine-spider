@@ -38,15 +38,24 @@ def parse_grapes(soup):
 	urls = deque()
 	for link in links:
 		urls.append(link['href'])
-		grape = dict()
-		grape['name'] = link.get_text()
-		grape['url'] = link['href']
-		grapes.append(grape)
+		# grape = dict()
+		# grape['name'] = link.get_text()
+		# grape['url'] = link['href']
+		# grapes.append(grape)
 	for soup in make_requests(urls):
+		print soup.title
 		print parse_information(soup)
 
 def parse_information(soup):
-	pass
+	if not soup:
+		print "No soup"
+		return
+	info = soup.find('div', {"itemprop":"articleBody"})
+	if not info:
+		print "No table tag"
+		return
+	strong = info.find('strong')
+	print "info: " + strong.get_text()
 
 def test_parse_grapes():
 	soup = make_request(test_url)
