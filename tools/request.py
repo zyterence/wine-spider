@@ -37,7 +37,7 @@ def html_to_soup(content):
 
 def make_request(url):
 	try:
-	    r = requests.get(url, headers={}, timeout=1, allow_redirects=True, proxies=proxies)
+	    r = requests.get(url, headers=headers, timeout=1, allow_redirects=True, proxies=proxies)
 	except requests.exceptions.Timeout:
 	    print 'Maybe set up for a retry, or continue in a retry loop'
 	except requests.exceptions.TooManyRedirects:
