@@ -4,12 +4,6 @@ import os, ast, json, string
 from collections import deque
 from tools.request import make_requests, make_request
 
-def test_regions():
-	print "test regions"
-
-def parse_subregions(soup):
-	return []
-
 def dfs_requests(urls, visited):
 	if visited is None:
 		visited = set()
@@ -28,3 +22,9 @@ def get_subregion_urls(url):
 			subregion_urls = parse_subregions(soup)
 			return subregion_urls
 	return []
+
+def parse_subregions(soup):
+	return []
+
+def test_regions():
+	print "test regions"
