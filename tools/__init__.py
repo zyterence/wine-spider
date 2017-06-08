@@ -1,1 +1,1 @@
-__all__ = ["request", "data", "file"]
+__all__ = ["request", "data", "file", "thread"]

@@ -5,7 +5,7 @@ from collections import deque
 from tools.request import make_requests, make_request
 
 lowercase = string.ascii_lowercase
-grape_url = 'http://www.wine-searcher.com/grapes-{}-{}'
+grapes_url = 'http://www.wine-searcher.com/grapes-{}-{}'
 test_url = 'http://www.wine-searcher.com/grapes-a-b'
 
 grapes = []
@@ -14,7 +14,7 @@ def get_urls():
 	assert len(lowercase) == 26, "There are 26 letters in the alphabet."
 	urls = deque()
 	for index in xrange(0, 26, 2):
-		url = grape_url.format(lowercase[index], lowercase[index+1])
+		url = grapes_url.format(lowercase[index], lowercase[index+1])
 		urls.append(url)
 	return urls
 
@@ -53,7 +53,7 @@ def parse_information(soup):
 	print soup.title
 	print grape
 
-def test_parse_grapes():
+def test_grapes():
 	soup = make_request(test_url)
 	if soup == None:
 		print "test_parse_grapes request failed!\n" + test_url

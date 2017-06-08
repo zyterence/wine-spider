@@ -9,17 +9,28 @@ proxyHost = "proxy.abuyun.com"
 proxyPort = "9020"
 proxyUser = "HV8L3A06VJP3D43D"
 proxyPass = "D6EEE3745DF426C4"
+
 proxyMeta = "http://%(user)s:%(pass)s@%(host)s:%(port)s" % {
     "host" : proxyHost,
     "port" : proxyPort,
     "user" : proxyUser,
     "pass" : proxyPass,
     }
+
 proxies = {
 	"http":proxyMeta,
 	"https":proxyMeta
 	}
-# proxies = { }
+
+headers= {
+	"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+	"Accept-Encoding":"gzip, deflate, sdch",
+	"Accept-Language":"zh-CN,zh;q=0.8",
+	"Cache-Control":"max-age=0",
+	"Connection":"keep-alive",
+	"Referer":"http://www.wine-searcher.com/regions.lml",
+	"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
+    }
 
 def html_to_soup(content):
 	return BeautifulSoup(content, "html.parser")
@@ -47,3 +58,4 @@ def make_requests(urls):
 			urls.append(url)
 		else:
 			yield soup
+ 
