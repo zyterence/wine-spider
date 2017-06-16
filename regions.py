@@ -20,7 +20,7 @@ def dfs_requests(urls, visited):
 
 def next_subregion_urls(url):
 	if len(url) == 1:
-		responses = make_requests([url])
+		responses = make_requests(deque([url]))
 	else:
 		return []
 	soup = None
@@ -39,6 +39,7 @@ def parse_subregions(soup):
 		return "No soup"
 	region_list = soup.find('ul', class_='top-level')
 	if not region_list:
+		print soup.title
 		return FINAL
 	else:
 		subregion_urls = []
@@ -47,7 +48,12 @@ def parse_subregions(soup):
 		return subregion_urls
 
 def test_regions():
-	print "test regions"
+	for soup in make_requests(deque([test_url])):
+		if soup == None:
+			print "test_parse_subregions request failed!\n" + test_url
+		else:
+			subregion_urls = parse_subregions(soup)
+			dfs_requests(deque(subregion_urls))
 
 def test_parse_subregions():
 	for soup in make_requests(deque([test_url])):
