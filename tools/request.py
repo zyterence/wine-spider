@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 
 proxyHost = "proxy.abuyun.com"
 proxyPort = "9020"
-proxyUser = "HV8L3A06VJP3D43D"
-proxyPass = "D6EEE3745DF426C4"
+proxyUser = "H8818H8C3J47268D"
+proxyPass = "F27803CC428DFB71"
 
 proxyMeta = "http://%(user)s:%(pass)s@%(host)s:%(port)s" % {
     "host" : proxyHost,
