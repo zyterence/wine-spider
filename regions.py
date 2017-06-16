@@ -48,17 +48,21 @@ def parse_subregions(soup):
 		return subregion_urls
 
 def test_regions():
+	print 'test_regions start'
 	for soup in make_requests(deque([test_url])):
 		if soup == None:
 			print "test_parse_subregions request failed!\n" + test_url
 		else:
 			subregion_urls = parse_subregions(soup)
 			dfs_requests(deque(subregion_urls))
+	print 'test_regions end'
 
 def test_parse_subregions():
+	print 'test_parse_subregions start'
 	for soup in make_requests(deque([test_url])):
 		if soup == None:
 			print "test_parse_subregions request failed!\n" + test_url
 		else:
 			subregion_urls = parse_subregions(soup)
 			print subregion_urls
+	print 'test_parse_subregions end'

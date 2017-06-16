@@ -54,8 +54,10 @@ def parse_information(soup):
 	print grape
 
 def test_grapes():
+	print 'test_grapes start'
 	soup = make_request(test_url)
 	if soup == None:
 		print "test_parse_grapes request failed!\n" + test_url
 	else:
 		parse_grapes(soup)
+	print 'test_grapes start'
