@@ -4,7 +4,8 @@ import os, ast, json, string
 from collections import deque
 from tools.request import make_requests, make_request
 
-test_url = 'https://www.wine-searcher.com/regions-california'
+# test_url = 'https://www.wine-searcher.com/regions-california'
+test_url = 'https://www.wine-searcher.com/regions-napa+valley'
 
 FINAL = True
 
@@ -12,6 +13,7 @@ def dfs_requests(urls, visited=None):
 	if visited is None:
 		visited = set()
 	for url in urls:
+		print 'dfs_requests'
 		visited.add(url)
 		subregion_urls = next_subregion_urls(url)
 		if len(subregion_urls) > 0:
@@ -19,10 +21,8 @@ def dfs_requests(urls, visited=None):
 	return visited
 
 def next_subregion_urls(url):
-	if len(url) == 1:
-		responses = make_requests(deque([url]))
-	else:
-		return []
+	print 'next_subregion_urls'
+	responses = make_requests(deque([url]))
 	soup = None
 	for response in responses:
 		if response != None:
@@ -39,12 +39,16 @@ def parse_subregions(soup):
 		return "No soup"
 	region_list = soup.find('ul', class_='top-level')
 	if not region_list:
-		print soup.title
+		return "No ul tag"
+
+	subregion_urls = []
+	for a in region_list.find_all('a', href=True):
+		subregion_urls.append(a['href'])
+
+	if len(subregion_urls)==0:
+		print soup.find('strong').get_text()
 		return FINAL
 	else:
-		subregion_urls = []
-		for a in region_list.find_all('a', href=True):
-			subregion_urls.append(a['href'])
 		return subregion_urls
 
 def test_regions():
@@ -54,6 +58,7 @@ def test_regions():
 			print "test_parse_subregions request failed!\n" + test_url
 		else:
 			subregion_urls = parse_subregions(soup)
+			print subregion_urls
 			dfs_requests(deque(subregion_urls))
 	print 'test_regions end'
 
