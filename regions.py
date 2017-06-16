@@ -8,7 +8,7 @@ test_url = 'https://www.wine-searcher.com/regions-california'
 
 FINAL = True
 
-def dfs_requests(urls, visited):
+def dfs_requests(urls, visited=None):
 	if visited is None:
 		visited = set()
 	for url in urls:
