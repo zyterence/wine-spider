@@ -50,6 +50,7 @@ def make_request(url):
 	    if r.status_code == requests.codes.ok:
 	    	return html_to_soup(r.text)
 
+# urls is deque type
 def make_requests(urls):
 	while len(urls)>0:
 		url = urls.popleft()

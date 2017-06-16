@@ -4,7 +4,9 @@ import os, ast, json, string
 from collections import deque
 from tools.request import make_requests, make_request
 
-FIANL = True
+test_url = 'https://www.wine-searcher.com/regions-california'
+
+FINAL = True
 
 def dfs_requests(urls, visited):
 	if visited is None:
@@ -26,17 +28,31 @@ def next_subregion_urls(url):
 		if response != None:
 			soup = response
 			subregion_urls = parse_subregions(soup)
-			if subregion_urls == FIANL
+			if subregion_urls == FINAL:
 				return []
-			else 
+			else:
 				return subregion_urls
 	return []
 
 def parse_subregions(soup):
-	if is final:
-		return FIANL
+	if not soup:
+		return "No soup"
+	region_list = soup.find('ul', class_='top-level')
+	if not region_list:
+		return FINAL
 	else:
+		subregion_urls = []
+		for a in region_list.find_all('a', href=True):
+			subregion_urls.append(a['href'])
 		return subregion_urls
 
 def test_regions():
 	print "test regions"
+
+def test_parse_subregions():
+	for soup in make_requests(deque([test_url])):
+		if soup == None:
+			print "test_parse_subregions request failed!\n" + test_url
+		else:
+			subregion_urls = parse_subregions(soup)
+			print subregion_urls
